@@ -15,12 +15,11 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
-        if (age >= 0 && age <= 120) {
-            this.age = age;
-            return this;
-        } else {
-            return this;
+        this.age = age;
+        if (age <= 0 || age >= 120) {
+            throw new IllegalArgumentException("Возраст должен быть в диапазоне 0 - 120 лет.");
         }
+        return this;
 
     }
 
@@ -30,6 +29,9 @@ public class PersonBuilder {
     }
 
     public Person build() {
+        if(name == null && surname == null) {
+            throw new IllegalStateException("Недостаточно аргументов");
+        }
         return new Person(name, surname, age, address);
     }
 
