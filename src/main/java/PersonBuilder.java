@@ -32,7 +32,15 @@ public class PersonBuilder {
         if(name == null && surname == null) {
             throw new IllegalStateException("Недостаточно аргументов");
         }
-        return new Person(name, surname);
+        if (age != 0){
+            if(address != null) {
+                return new Person(name, surname, age, address);
+            } else {
+                return new Person(name, surname, age);
+            }
+        } else {
+            return new Person(name, surname);
+        }
     }
 
 }
